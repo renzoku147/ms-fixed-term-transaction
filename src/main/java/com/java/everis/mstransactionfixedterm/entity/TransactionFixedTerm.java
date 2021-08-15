@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
@@ -20,19 +19,20 @@ public class TransactionFixedTerm {
     @Id
     private String id;
 
+    @NotNull
     private FixedTerm fixedTerm;
 
+    @NotNull
     private String transactionCode;
 
-    @Valid
+    @NotNull
     private TypeTransaction typeTransaction;
 
     @NotNull
     private Double transactionAmount;
 
-    @NotNull
+    private Double commissionAmount;
+
     private LocalDateTime transactionDateTime;
-
-
 
 }

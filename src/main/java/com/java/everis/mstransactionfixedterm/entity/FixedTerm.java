@@ -1,14 +1,17 @@
 package com.java.everis.mstransactionfixedterm.entity;
 
 import lombok.Data;
+import org.springframework.data.annotation.Id;
 
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
 public class FixedTerm {
 
-    String id;
+    private String id;
 
     private Customer customer;
 
@@ -20,7 +23,15 @@ public class FixedTerm {
 
     private Double balance;
 
-    private Integer limitMovements;
+    private Integer limitDeposits;
+
+    private Integer limitDraft;
+
+    private LocalDate allowDateTransaction;
+
+    private Integer freeTransactions;
+
+    private Double commissionTransactions;
 
     private LocalDateTime date;
 
