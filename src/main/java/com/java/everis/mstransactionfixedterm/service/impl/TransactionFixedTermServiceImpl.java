@@ -71,4 +71,9 @@ public class TransactionFixedTermServiceImpl implements TransactionFixedTermServ
                 .bodyToMono(FixedTerm.class);
     }
 
+    @Override
+    public Flux<TransactionFixedTerm> findByFixedTermCardNumber(String cardNumber) {
+        return fixedTermRepository.findByFixedTermCardNumber(cardNumber);
+    }
+
 }

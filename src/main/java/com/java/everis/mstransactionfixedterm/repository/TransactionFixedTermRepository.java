@@ -7,5 +7,7 @@ import reactor.core.publisher.Flux;
 public interface TransactionFixedTermRepository extends ReactiveMongoRepository<TransactionFixedTerm, String> {
 
     Flux<TransactionFixedTerm> findByFixedTermId(String id);
+
+    Flux<TransactionFixedTerm> findByFixedTermCardNumber(String cardNumber);
 }
 

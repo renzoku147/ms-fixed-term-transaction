@@ -9,9 +9,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.java</groupId>
-	<artifactId>ms-fixed-term</artifactId>
+	<artifactId>ms-fixed-term-transaction</artifactId>
 	<version>1</version>
-	<name>ms-fixed-term</name>
+	<name>ms-fixed-term-transaction</name>
 	<packaging>jar</packaging>
 	<description>Microservicio para transacciones de cuentas plazo fijo</description>
 	<properties>
@@ -88,6 +88,11 @@
 						</exclude>
 					</excludes>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>3.7.0.1746</version>
 			</plugin>
 		</plugins>
 	</build>

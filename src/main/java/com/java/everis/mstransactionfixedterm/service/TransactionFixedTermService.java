@@ -23,4 +23,6 @@ public interface TransactionFixedTermService {
     Mono<FixedTerm> findFixedTermById(String t);
 
     Mono<FixedTerm> updateFixedTerm(FixedTerm ft);
+
+    Flux<TransactionFixedTerm> findByFixedTermCardNumber(String cardNumber);
 }

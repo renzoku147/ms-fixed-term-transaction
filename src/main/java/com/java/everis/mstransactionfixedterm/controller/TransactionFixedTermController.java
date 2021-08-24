@@ -1,14 +1,12 @@
 package com.java.everis.mstransactionfixedterm.controller;
 
-import com.java.everis.mstransactionfixedterm.entity.FixedTerm;
 import com.java.everis.mstransactionfixedterm.entity.TransactionFixedTerm;
-import com.java.everis.mstransactionfixedterm.entity.TypeTransaction;
 import com.java.everis.mstransactionfixedterm.service.TransactionFixedTermService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -35,6 +33,22 @@ public class TransactionFixedTermController {
     public Mono<TransactionFixedTerm> findById(@PathVariable String id){
         return fixedTermService.findById(id);
     }
+
+    @GetMapping("/checkAllTransactions/{numberCard}")
+    public Flux<TransactionFixedTerm> findAllTransactions(@PathVariable String numberCard){
+        return fixedTermService.findByFixedTermCardNumber(numberCard);
+    }
+
+    @GetMapping("/checkAllCommissions/{numberCard}/{from}/{to}")
+    public Flux<TransactionFixedTerm> findAllCommissions(@PathVariable String numberCard,
+                                                         @PathVariable(name = "from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
+                                                         @PathVariable(name = "to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to){
+        return fixedTermService.findByFixedTermCardNumber(numberCard)
+                .filter(ft -> ft.getTransactionDateTime().toLocalDate().isAfter(from)
+                            && ft.getTransactionDateTime().toLocalDate().isBefore(to)
+                            && ft.getCommissionAmount() > 0);
+    }
+
 
     @PostMapping("/create")
     public Mono<ResponseEntity<TransactionFixedTerm>> create(@RequestBody TransactionFixedTerm transactionFixedTerm){
